@@ -1,0 +1,124 @@
+persistence.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="Jpa">
+	
+	<class>com.jpa.student.StudentEntity</class>
+	
+	<properties>
+	
+	<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+	<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/chocklate"/>
+	 <property name="javax.persistence.jdbc.user" value="root"/>  
+         <property name="javax.persistence.jdbc.password" value="1234"/>  
+         <property name="eclipselink.logging.level" value="SEVERE"/>  
+         <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>  
+	
+	
+	</properties>
+	
+	</persistence-unit>
+</persistence>
+
+StudentEntity.java in first package
+
+
+package com.jpa.student;
+import javax.persistence.*;
+
+@Entity
+@Table(name="student2")
+public class StudentEntity 
+{
+	@Id
+	private int id;
+	private int age;
+	private String name;
+	
+	public StudentEntity(int id,String name,int age)
+	{
+		super();
+		this.id=id;
+		this.name=name;
+		this.age=age;
+	}
+	public StudentEntity()
+	{
+		super();
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
+}
+
+PersistStudent.java
+
+package com.jpa.persist;
+
+
+import javax.persistence.*;
+import com.jpa.student.StudentEntity ;
+
+
+public class PersistStudent {  
+    
+    public static void main(String args[])  
+    {  
+          
+        EntityManagerFactory emf=Persistence.createEntityManagerFactory("Jpa");  
+        EntityManager em=emf.createEntityManager();  
+          
+        em.getTransaction().begin();  
+          
+System.out.println("fjdhiksg");
+
+        StudentEntity s1=new StudentEntity();  
+        s1.setId(101);  
+        s1.setAge(24);  
+        s1.setName("Gauri");  
+        
+          
+        StudentEntity s2=new StudentEntity();  
+        s2.setId(102);  
+        s2.setAge(22);  
+        s2.setName("Ankita");  
+       
+          
+        StudentEntity s3=new StudentEntity();  
+        s3.setId(103);  
+        s3.setAge(26);  
+        s3.setName("Neha");  
+      
+          
+        em.persist(s1);  
+        em.persist(s2);  
+        em.persist(s3);       
+  
+em.getTransaction().commit();  
+          
+emf.close(); 
+        em.close();
+       
+          
+    }  
+}  

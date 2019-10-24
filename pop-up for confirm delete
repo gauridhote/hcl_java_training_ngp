@@ -1,0 +1,27 @@
+Working Flow Of Jsp,Ajax & Servlet
+===================================
+
+1. Create a JSP file to send the output to desired location here desired location is viewusers.jsp
+Jsp File name you may have "ViewUsersAjax.JSP"
+
+2.In the viewusers.jsp make a DIV tag with ID dragon <div id="dragon> </div>
+
+3.In the "ViewUsersAjax.JSP",display anything..."Hello Girl"
+
+4.Create a js folder in WEB-INF and inside it create a javascript file in "umGen.js"
+
+5.Write a below code within "umGem.js" file.
+-----------------------------------------------------------------------------------------------------------------------
+
+var request;
+var txt;
+
+function confirmDel(myID)
+{
+  var r =confirm("Do you want to delete");
+  if(r==true)
+  {
+  txt="You press OK!";
+  window.location.href="/UserManagement/DeleteUser?id="+myID;
+  return true;
+  
